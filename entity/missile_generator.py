@@ -27,7 +27,8 @@ class MissileGenerator():
 
     def check_generation(self):
         duration = int(time.time() - self.start_time)
-        if duration % 5 == 0:
+        if duration % 1 == 0 and duration != 0:
+            self.start_time = time.time()
             return self.create_missile()
         return None
 

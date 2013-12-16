@@ -19,7 +19,7 @@ screen.blit(gs.surface, (0,0))
 pygame.display.flip()
 while 1:
     # Limit frame
-    pygame.time.Clock().tick(30)
+    pygame.time.Clock().tick(50)
 
     # Catch event to quit game
     for event in pygame.event.get():

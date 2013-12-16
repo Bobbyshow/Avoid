@@ -73,14 +73,6 @@ class GameScreen(BaseScreen):
 
         # Missile Generator
         self.miss_gen =  MissileGenerator()
-        missile = Missile(
-            'Missile',
-            (160,160,42,20),
-            [1,1],
-            3,
-            0,
-            'img/Missile.png'
-        )
         self.grp_missile = Group()
 
     def execute(self, surface):

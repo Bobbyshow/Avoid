@@ -18,27 +18,27 @@ pygame.init()
 screen = pygame.display.set_mode((640,480))
 
 # Game entities init
-player = Hero('player', (320,240,15,15), [2,2], 4, 3, '../apps/Joueur.png')
+player = Hero('player', (320,240,15,15), [2,2], 4, 3, 'img/Joueur.png')
 barrier = []
-barrier.append(Barrier('barrier', (259,160,121,20), [2,2], 2, 0, '../apps/Barriere.png'))
+barrier.append(Barrier('barrier', (259,160,121,20), [2,2], 2, 0, 'img/Barriere.png'))
 barrier[0].direction_set(UP)
-barrier.append(Barrier('barrier', (259,300,121,20), [2,2], 2, 0, '../apps/Barriere.png'))
+barrier.append(Barrier('barrier', (259,300,121,20), [2,2], 2, 0, 'img/Barriere.png'))
 barrier[1].direction_set(DOWN)
 missile = []
-missile.append(Missile('missile', (100,300,22,43), [3,1], 3, 0, '../apps/Missile.png'))
+missile.append(Missile('missile', (100,300,22,43), [3,1], 3, 0, 'img/Missile.png'))
 missile[0].direction_set(UP)
-missile.append(Missile('missile', (-10,240,43,22), [3,3], 3, 0, '../apps/Missile.png'))
+missile.append(Missile('missile', (-10,240,43,22), [3,3], 3, 0, 'img/Missile.png'))
 missile[1].direction_set(RIGHT)
-missile.append(Missile('missile', (650,300,43,22), [3,3], 3, 0, '../apps/Missile.png'))
+missile.append(Missile('missile', (650,300,43,22), [3,3], 3, 0, 'img/Missile.png'))
 missile[2].direction_set(LEFT)
-missile.append(Missile('missile', (260,-10,22,43), [3,3], 3, 0, '../apps/Missile.png'))
+missile.append(Missile('missile', (260,-10,22,43), [3,3], 3, 0, 'img/Missile.png'))
 missile[3].direction_set(DOWN)
 
 grp = Group()
 barrier_grp = Group()
 missile_grp = Group()
 
-background = pygame.image.load('../apps/Background.png').convert_alpha()
+background = pygame.image.load('img/Background.png').convert_alpha()
 background_rect = background.get_rect()
 
 screen.blit(
@@ -61,7 +61,7 @@ pygame.display.flip()
 
 while 1:
     # Limit frame
-    pygame.time.Clock().tick(10)
+    pygame.time.Clock().tick(30)
     # Catch event to quit game
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
