@@ -27,18 +27,17 @@ while 1:
     # Main loop execute and catch screen change
     try:
         main_screen.main_loop()
-        pygame.display.update()
         screen.blit(main_screen.surface, (0,0))
+        pygame.display.update()
     except ChangeScreenException as cse:
         print str(cse)
         if cse.value == 1:
             gs = GameScreen(640,480,pygame.image.load('img/Background.png').convert_alpha())
             main_screen = gs
-            continue
         elif cse.value == 0:
             del gs
-            main_screen = ms
-            continue
+            ms.game_over(cse.msg)
+            main_screen = ms            
         else:
             raise Exception('Problem during ChangeScreen. Check values')
     

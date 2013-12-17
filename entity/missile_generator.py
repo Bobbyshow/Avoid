@@ -15,10 +15,10 @@ class MissileGenerator():
         
     Can generate missiles on map.
     """
-    north = -50
-    east = 670
+    north = -20
+    east = 660
     south = 500
-    ouest = -50
+    ouest = -20
     
     def __init__(self):
         self.start_time = time.time()
@@ -37,8 +37,8 @@ class MissileGenerator():
             position = (
                 random.randint(260,370),
                 self.south,
-                22,
-                43
+                15,
+                40
             )
             missile = Missile(
                 'Missile',
@@ -53,8 +53,8 @@ class MissileGenerator():
             position = (
                 random.randint(260,370),
                 self.north,
-                22,
-                43
+                15,
+                40
             )
             missile = Missile(
                 'Missile',
@@ -69,8 +69,8 @@ class MissileGenerator():
             position = (
                 self.ouest,
                 random.randint(180,280),
-                43,
-                22
+                40,
+                15
             )
             missile = Missile(
                 'Missile',
@@ -85,8 +85,8 @@ class MissileGenerator():
             position = (
                 self.east,
                 random.randint(180,280),
-                43,
-                22
+                40,
+                15
             )
             missile = Missile(
                 'Missile',

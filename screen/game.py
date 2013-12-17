@@ -1,12 +1,7 @@
 #-*- coding: utf-8 -*-
 
 import pygame.image
-
-from entity.hero import Hero
-from entity.barrier import Barrier
-from entity.missile_generator import MissileGenerator
-from entity.missile import Missile
-from lib.base_screen import BaseScreen, ChangeScreenException
+import time 
 
 from pygame.locals import K_LEFT as LEFT
 from pygame.locals import K_DOWN as DOWN 
@@ -16,14 +11,22 @@ from pygame.locals import K_RIGHT as RIGHT
 from pygame.surface import Surface
 from pygame.sprite import RenderUpdates as Group
 
+from entity.hero import Hero
+from entity.barrier import Barrier
+from entity.missile_generator import MissileGenerator
+from entity.missile import Missile
+from lib.base_screen import BaseScreen, ChangeScreenException
+
 class GameScreen(BaseScreen):
     """ Screen inherit from BaseScreen.
     
     Game's screen.
     """
-    __hitbox_test = True
-    
+    __hitbox_test = False
+
     def init_entities_after(self, surface):
+        #Score start 
+        self.score = 0
         #Group player
         self.grp = Group()
         player = Hero(
@@ -38,7 +41,6 @@ class GameScreen(BaseScreen):
         self.grp.add(player)
         self.grp.update()
         self.grp.draw(surface)
-        #self.grp = grp
 
         #Group barrier
         barrier = []
@@ -75,7 +77,13 @@ class GameScreen(BaseScreen):
         self.miss_gen =  MissileGenerator()
         self.grp_missile = Group()
 
+        # Time of game
+        self.time = time
+
+
     def execute(self, surface):
+        # Destroy old missile
+        self.destroy_missile()
         # Check collapse
         self.check_collapse()
         # Check missile's group
@@ -113,6 +121,7 @@ class GameScreen(BaseScreen):
 
         return (
             self.grp.draw(surface) +
+            self.grp.sprites()[0].childs.draw(surface) +
             self.grp_barrier.draw(surface) +
             self.grp_missile.draw(surface)
         )
@@ -142,13 +151,32 @@ class GameScreen(BaseScreen):
         if not player.is_alive():
             player.kill()
             del player
-            raise ChangeScreenException(0,'You lose the game')
-        
+            raise ChangeScreenException(
+                0,
+                'You lose. Score : %s' % self.score
+            )
 
-    """
-    def erase_all_map(self):
-    bg = pygame.image.load(self.background).convert_alpha()
-    self.grp.clear(self.surface, bg)
-    self.grp_missile.clear(self.surface, bg)
-    self.grp_barrier.clear(self.surface, bg)
-    """    
+    def destroy_missile(self):
+        for sprite in self.grp_missile.sprites():            
+            if sprite.direction_get() == UP:
+                if sprite.get_rect(2).top < self.miss_gen.north:
+                    sprite.kill()
+                    del sprite
+                    self.score = self.score + 1
+            elif sprite.direction_get() == DOWN:
+                if sprite.get_rect(2).top > self.miss_gen.south:
+                    sprite.kill()
+                    del sprite
+                    self.score = self.score + 1
+            elif sprite.direction_get() == LEFT:
+                if sprite.get_rect(2).left < self.miss_gen.ouest:
+                    sprite.kill()
+                    del sprite
+                    self.score = self.score + 1
+            elif sprite.direction_get() == DOWN:
+                if sprite.get_rect(2).left > self.miss_gen.east:
+                    sprite.kill()
+                    del sprite
+                    self.score = self.score + 1
+
+

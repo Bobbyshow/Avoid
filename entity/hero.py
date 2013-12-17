@@ -2,6 +2,8 @@
 
 from lib.base_entity import BaseEntity
 from lib.base_animation import BaseAnimation
+from life import Life
+
 from pygame.locals import K_UP as UP
 
 
@@ -32,7 +34,32 @@ class Hero(BaseEntity):
     def __init__(self, name, rect_data, speed, max_frame, max_frame_delay, img):
         super(Hero, self).__init__(name, rect_data, speed, max_frame, max_frame_delay, img)
         self.life = 3
-        
+        self.add_child([
+            Life(
+                'Life',
+                (20,20,16,17),
+                [0,0],
+                2,
+                0,
+                'img/Life.png'
+            ),
+            Life(
+                'Life',
+                (40,20,16,17),
+                [0,0],
+                2,
+                0,
+                'img/Life.png'
+            ),
+            Life(
+                'Life',
+                (60,20,16,17),
+                [0,0],
+                2,
+                0,
+                'img/Life.png'
+            )
+        ])
     def init_animation(self, max_frame, max_frame_delay, img):
         return HeroAnimation(max_frame, max_frame_delay, img)
         
@@ -41,5 +68,6 @@ class Hero(BaseEntity):
         return self.life > 0
     
     def lose_life(self):
+        """Remove 1 to life and remove 1 life sprite"""
         self.life = self.life - 1
-        print self.life
+        self.childs.sprites()[0].kill()

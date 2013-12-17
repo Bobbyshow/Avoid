@@ -8,11 +8,11 @@ class MissileAnimation(BaseAnimation):
     """Custom class Animation : MissileAnimation
 
     """
-    WIDTH_SPRITE_V = 22
-    HEIGHT_SPRITE_V = 44
+    WIDTH_SPRITE_V = 17
+    HEIGHT_SPRITE_V = 43
 
-    WIDTH_SPRITE_H = 44
-    HEIGHT_SPRITE_H = 22
+    WIDTH_SPRITE_H = 43
+    HEIGHT_SPRITE_H = 17
     
     def get_sprite(self, move_direction):
         direction_num = move_direction - UP 
