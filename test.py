@@ -1,23 +1,20 @@
 #-*- coding: utf-8 -*-
 
 import pygame
-import sys
-from pygame.locals import Color
-from pygame.locals import K_LEFT as LEFT
-from pygame.locals import K_DOWN as DOWN 
-from pygame.locals import K_UP as UP
-from pygame.locals import K_RIGHT as RIGHT
+from exceptions import Exception
 
 from screen.game import GameScreen
 from screen.menu import MenuScreen
+from screen.lib.base_screen import ChangeScreenException
 
 # Game init
 pygame.init()
 screen = pygame.display.set_mode((640,480))
 ms = MenuScreen(640,480,pygame.Surface((640,480))) 
-gs = GameScreen(640,480,pygame.image.load('img/Background.png').convert_alpha())
 
-screen.blit(ms.surface, (0,0))
+main_screen = ms
+
+screen.blit(main_screen.surface, (0,0))
 pygame.display.flip()
 while 1:
     # Limit frame
@@ -27,8 +24,21 @@ while 1:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
-
-    ms.main_loop()
-    pygame.display.update()
-    screen.blit(ms.surface, (0,0))
+    # Main loop execute and catch screen change
+    try:
+        main_screen.main_loop()
+        pygame.display.update()
+        screen.blit(main_screen.surface, (0,0))
+    except ChangeScreenException as cse:
+        print str(cse)
+        if cse.value == 1:
+            gs = GameScreen(640,480,pygame.image.load('img/Background.png').convert_alpha())
+            main_screen = gs
+            continue
+        elif cse.value == 0:
+            del gs
+            main_screen = ms
+            continue
+        else:
+            raise Exception('Problem during ChangeScreen. Check values')
     
