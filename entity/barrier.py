@@ -15,14 +15,20 @@ class BarrierAnimation(BaseAnimation):
     def get_sprite(self, move_direction):
         if move_direction - UP == 0 or move_direction - UP == 1:
             direction_num = 0
+            frame =  self.subsurface(
+                0,
+                self.frame * self.HEIGHT_SPRITE,
+                self.WIDTH_SPRITE, 
+                self.HEIGHT_SPRITE
+            ).convert_alpha()
         else:
-            direction_num = 1
-        frame =  self.subsurface(
-            direction_num * self.WIDTH_SPRITE,
-            self.frame * self.HEIGHT_SPRITE,
-            self.WIDTH_SPRITE, 
-            self.HEIGHT_SPRITE
-        ).convert_alpha()
+            frame =  self.subsurface(
+                self.frame * self.HEIGHT_SPRITE,
+                2 * self.HEIGHT_SPRITE,                
+                self.HEIGHT_SPRITE,
+                self.WIDTH_SPRITE, 
+            ).convert_alpha()
+        
         return frame
         
 class Barrier(BaseEntity):

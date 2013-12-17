@@ -15,7 +15,7 @@ class MenuScreen(BaseScreen):
             1,
             (255,255,255)
         )
-        surface.blit(self.textImg, (250,200))
+        surface.blit(self.textImg, (200,200))
 
     def execute(self, surface):
         if pygame.key.get_pressed()[SPACE] == 1:
@@ -30,6 +30,6 @@ class MenuScreen(BaseScreen):
     def game_over(self, text, number=None):
         BaseScreen.erase_all_map(self)
         font = Font(None, 30)
-        textImg = font.render(text, 1 ,(255,255,255))
-        self.surface.blit(textImg, (250,100))
+        textImg = font.render(text, 1, (255,255,255))
+        self.surface.blit(textImg, (200,100))
         

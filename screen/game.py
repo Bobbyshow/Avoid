@@ -66,7 +66,28 @@ class GameScreen(BaseScreen):
             )
         )
         barrier[1].direction_set(DOWN)
-        
+        barrier.append(
+            Barrier(
+                'barrier',
+                (240,180,20,121),
+                [2,2],
+                2,
+                0,
+                'img/Barriere.png'
+            )
+        )
+        barrier[2].direction_set(LEFT)
+        barrier.append(
+            Barrier(
+                'barrier',
+                (380,180,20,121),
+                [2,2],
+                2,
+                0,
+                'img/Barriere.png'
+            )
+        )
+        barrier[3].direction_set(LEFT)
         grp_barrier = Group()
         grp_barrier.add(barrier)
         grp_barrier.update()
