@@ -31,7 +31,7 @@ class Hero(BaseEntity):
 
     def __init__(self, name, rect_data, speed, max_frame, max_frame_delay, img):
         super(Hero, self).__init__(name, rect_data, speed, max_frame, max_frame_delay, img)
-        self.life = 1
+        self.life = 3
         
     def init_animation(self, max_frame, max_frame_delay, img):
         return HeroAnimation(max_frame, max_frame_delay, img)
@@ -42,3 +42,4 @@ class Hero(BaseEntity):
     
     def lose_life(self):
         self.life = self.life - 1
+        print self.life
