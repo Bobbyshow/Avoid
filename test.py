@@ -1,6 +1,7 @@
 #-*- coding: utf-8 -*-
 
 import pygame
+import sys
 from exceptions import Exception
 
 from screen.game import GameScreen
