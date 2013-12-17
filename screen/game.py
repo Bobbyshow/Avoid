@@ -2,11 +2,11 @@
 
 import pygame.image
 
-from hero import Hero
-from barrier import Barrier
-from missile_generator import MissileGenerator
-from missile import Missile
-from lib.base_screen import BaseScreen
+from entity.hero import Hero
+from entity.barrier import Barrier
+from entity.missile_generator import MissileGenerator
+from entity.missile import Missile
+from lib.base_screen import BaseScreen, ChangeScreenException
 
 from pygame.locals import K_LEFT as LEFT
 from pygame.locals import K_DOWN as DOWN 
@@ -21,9 +21,9 @@ class GameScreen(BaseScreen):
     
     Game's screen.
     """
-    __hitbox_test = False
+    __hitbox_test = True
     
-    def init_entities(self, surface):
+    def init_entities_after(self, surface):
         #Group player
         self.grp = Group()
         player = Hero(
@@ -118,7 +118,32 @@ class GameScreen(BaseScreen):
         )
         
     def check_collapse(self):
-        pass
+        for sprite in (
+            self.grp.sprites() + 
+            self.grp_missile.sprites() + 
+            self.grp_barrier.sprites()):
+            
+            sprite.setup_collapse()
+        # Check collapse with player and missile
+        player = self.grp.sprites()[0]
+        collapse_sprite = pygame.sprite.spritecollide(player, self.grp_missile, True)
+        for sprite in collapse_sprite:
+            del sprite
+            player.lose_life()
+
+        # Check collapse :: barrier vs player
+        collapse_sprite = pygame.sprite.spritecollide(
+            player,
+            self.grp_barrier, False
+        )
+        for sprite in collapse_sprite:
+            player.lose_life()
+            
+        if not player.is_alive():
+            player.kill()
+            del player
+            raise ChangeScreenException(0,'You lose the game')
+        
 
     """
     def erase_all_map(self):
