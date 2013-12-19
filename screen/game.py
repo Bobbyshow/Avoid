@@ -9,13 +9,14 @@ from pygame.locals import K_UP as UP
 from pygame.locals import K_RIGHT as RIGHT
 
 from pygame.surface import Surface
-from pygame.sprite import RenderUpdates as Group
 
 from entity.hero import Hero
 from entity.barrier import Barrier
 from entity.missile_generator import MissileGenerator
 from entity.missile import Missile
+
 from lib.base_screen import BaseScreen, ChangeScreenException
+from lib.base_group import Group
 
 class GameScreen(BaseScreen):
     """ Screen inherit from BaseScreen.
@@ -142,7 +143,6 @@ class GameScreen(BaseScreen):
 
         return (
             self.grp.draw(surface) +
-            self.grp.sprites()[0].childs.draw(surface) +
             self.grp_barrier.draw(surface) +
             self.grp_missile.draw(surface)
         )
