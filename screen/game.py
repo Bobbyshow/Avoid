@@ -23,21 +23,15 @@ class GameScreen(BaseScreen):
     
     Game's screen.
     """
-    __hitbox_test = False
+    __hitbox_test = True
 
     def init_entities_after(self, surface):
         #Score start 
         self.score = 0
+
         #Group player
         self.grp = Group()
-        player = Hero(
-            'player',
-            (320,240,15,15),
-            [2,2],
-            4,
-            3,
-            'img/Joueur.png'
-        )
+        player = Hero((320,240,15,15))
         
         self.grp.add(player)
         self.grp.update()
@@ -46,48 +40,14 @@ class GameScreen(BaseScreen):
         #Group barrier
         barrier = []
         barrier.append(
-            Barrier(
-                'barrier',
-                (259,160,121,20),
-                [2,2],
-                2,
-                0,
-                'img/Barriere.png'
-            )
+            Barrier((259,160,121,20)),
+            Barrier((259,300,121,20)),
+            Barrier((240,180,20,121)),
+            Barrier((380,180,20,121))
         )
         barrier[0].direction_set(UP)
-        barrier.append(
-            Barrier(
-                'barrier',
-                (259,300,121,20),
-                [2,2],
-                2,
-                0,
-                'img/Barriere.png'
-            )
-        )
-        barrier[1].direction_set(DOWN)
-        barrier.append(
-            Barrier(
-                'barrier',
-                (240,180,20,121),
-                [2,2],
-                2,
-                0,
-                'img/Barriere.png'
-            )
-        )
+        barrier[1].direction_set(UP)
         barrier[2].direction_set(LEFT)
-        barrier.append(
-            Barrier(
-                'barrier',
-                (380,180,20,121),
-                [2,2],
-                2,
-                0,
-                'img/Barriere.png'
-            )
-        )
         barrier[3].direction_set(LEFT)
         grp_barrier = Group()
         grp_barrier.add(barrier)

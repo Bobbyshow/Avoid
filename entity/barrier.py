@@ -37,6 +37,15 @@ class Barrier(BaseEntity):
     Entity for barrier. Represents barrier
     and barrier's animation
     """
+    def __init__(self, rect_data)
+        super(Barrier, self).__init__(
+            name='Barrier',
+            rect_data=rect_data,
+            speed=[2,2],
+            max_frame=2, 
+            max_frame_delay=0, 
+            img='img/Barriere.png'
+        )
     def direction_set(self, direction):
         self.direction = direction
 

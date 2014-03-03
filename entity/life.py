@@ -40,8 +40,15 @@ class LifeAnimation(BaseAnimation):
  
 class Life(BaseEntity):
     """Custom class: Life entity."""
-    def __init__(self, name, rect_data, speed, max_frame, max_frame_delay, img):
-        super(Life, self).__init__(name, rect_data, speed, max_frame, max_frame_delay, img)
+    def __init__(self, rect_data):
+        super(Life, self).__init__(
+            name='Life',
+            rect_data=rect_data,
+            speed=[0,0], 
+            max_frame=2, 
+            max_frame_delay=0, 
+            img='img/Life.png'
+        )
 
     def init_animation(self, max_frame, max_frame_delay, img):
         return LifeAnimation(max_frame, max_frame_delay, img)

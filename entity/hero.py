@@ -31,35 +31,22 @@ class Hero(BaseEntity):
     and player's move
     """
 
-    def __init__(self, name, rect_data, speed, max_frame, max_frame_delay, img):
-        super(Hero, self).__init__(name, rect_data, speed, max_frame, max_frame_delay, img)
+    def __init__(self, rect_data):
+        super(Hero, self).__init__(
+            name='Hero',
+            rect_data=rect_data,
+            speed=[2,2],
+            max_frame=4, 
+            max_frame_delay=3, 
+            img='img/Joueur.png'
+        )
         self.life = 3
         self.add_child([
-            Life(
-                'Life',
-                (20,20,16,17),
-                [0,0],
-                2,
-                0,
-                'img/Life.png'
-            ),
-            Life(
-                'Life',
-                (40,20,16,17),
-                [0,0],
-                2,
-                0,
-                'img/Life.png'
-            ),
-            Life(
-                'Life',
-                (60,20,16,17),
-                [0,0],
-                2,
-                0,
-                'img/Life.png'
-            )
+            Life((20,20,16,17)),
+            Life((40,20,16,17)),
+            Life((60,20,16,17))
         ])
+
     def init_animation(self, max_frame, max_frame_delay, img):
         return HeroAnimation(max_frame, max_frame_delay, img)
         
