@@ -33,77 +33,40 @@ class MissileGenerator():
         return None
 
     def create_missile(self):
-        if random.randint(0,3) == 0:
+        random_int = random.randint(0,3)
+        if random_int < 2:
+            if random_int == 0:
+                direction = self.south
+                move_to = UP
+            else:
+                direction = self.north
+                move_to = DOWN
             position = (
                 random.randint(260,370),
-                self.south,
+                direction,
                 15,
                 40
             )
-            missile = Missile(
-                'Missile',
-                position,
-                [3,3],
-                3,
-                0,
-                'img/Missile.png'
-            )
-            missile.direction_set(UP)
-        elif random.randint(0,3) == 1:
-            position = (
-                random.randint(260,370),
-                self.north,
-                15,
-                40
-            )
-            missile = Missile(
-                'Missile',
-                position,
-                [3,3],
-                3,
-                0,
-                'img/Missile.png'
-            )
-            missile.direction_set(DOWN)
-        elif random.randint(0,3) == 2:
-            position = (
-                self.ouest,
-                random.randint(180,280),
-                40,
-                15
-            )
-            missile = Missile(
-                'Missile',
-                position,
-                [3,3],
-                3,
-                0,
-                'img/Missile.png'
-            )
-            missile.direction_set(RIGHT)
-        elif random.randint(0,3) == 3:
-            position = (
-                self.east,
-                random.randint(180,280),
-                40,
-                15
-            )
-            missile = Missile(
-                'Missile',
-                position,
-                [3,3],
-                3,
-                0,
-                'img/Missile.png'
-            )
-            missile.direction_set(LEFT)
         else:
-            return None
+            if random_int == 2:
+                direction = self.ouest
+                move_to = RIGHT
+            else:
+                direction = self.east
+                move_to = LEFT
+            position = (
+                direction,
+                random.randint(180,280),
+                40,
+                15
+            )
+        missile = Missile(
+            1,
+            position,
+        )
+        missile.direction_set(move_to)
         return missile
     
     def level_up(self):
         if self.level < self.max_level:
             self.level = self.level + 1
-    
-    
-    
