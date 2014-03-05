@@ -48,6 +48,7 @@ class Missile(BaseEntity):
             max_frame_delay=0, 
             img='img/Missile.png'
         )
+        self.set_type(typeof)
 
     def direction_set(self, direction):
         self.direction = direction
@@ -63,3 +64,25 @@ class Missile(BaseEntity):
         self.move(self.direction)
         self.animation.update()
         self.setup_animation(self.direction)
+    
+    def set_type(self, typeof=0):
+        """Create custom properties, linked with typeof.
+
+        Typeof :
+        - 0 : Normal
+        - 1 : Fast
+        - 2 : Very Fast
+        """
+        if typeof == 0:
+            return
+        if typeof == 1:
+            self.speed = [
+                self.speed[0]*2,
+                self.speed[1]*2
+            ]
+        if typeof == 2:
+            self.speed = [
+                self.speed[0]*3,
+                self.speed[1]*3
+            ]
+        

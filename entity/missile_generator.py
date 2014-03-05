@@ -61,7 +61,7 @@ class MissileGenerator():
                 15
             )
         missile = Missile(
-            1,
+            2,
             position,
         )
         missile.direction_set(move_to)

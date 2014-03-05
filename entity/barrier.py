@@ -37,7 +37,7 @@ class Barrier(BaseEntity):
     Entity for barrier. Represents barrier
     and barrier's animation
     """
-    def __init__(self, rect_data)
+    def __init__(self, rect_data):
         super(Barrier, self).__init__(
             name='Barrier',
             rect_data=rect_data,

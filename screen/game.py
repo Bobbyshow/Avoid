@@ -38,13 +38,12 @@ class GameScreen(BaseScreen):
         self.grp.draw(surface)
 
         #Group barrier
-        barrier = []
-        barrier.append(
+        barrier = [
             Barrier((259,160,121,20)),
             Barrier((259,300,121,20)),
             Barrier((240,180,20,121)),
             Barrier((380,180,20,121))
-        )
+        ]
         barrier[0].direction_set(UP)
         barrier[1].direction_set(UP)
         barrier[2].direction_set(LEFT)
