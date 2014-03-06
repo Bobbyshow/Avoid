@@ -46,6 +46,24 @@ class Hero(BaseEntity):
             Life((40,20,16,17)),
             Life((60,20,16,17))
         ])
+        
+    def move(self, move_direction):
+        """Basic movement."""
+        x, y = self.rect_collapse.topleft
+        direction_num = move_direction - UP
+        if direction_num == 0:
+            move = (0, -1)
+        elif direction_num == 1:
+            move = (0, 1)
+        elif direction_num == 2:
+            move = (1, 0)
+        elif direction_num == 3:
+            move = (-1, 0)
+        
+        x = x + (self.speed[0] * move[0]) 
+        y = y + (self.speed[1] * move[1])
+        self.rect_collapse.left = x 
+        self.rect_collapse.top = y
 
     def init_animation(self, max_frame, max_frame_delay, img):
         return HeroAnimation(max_frame, max_frame_delay, img)
